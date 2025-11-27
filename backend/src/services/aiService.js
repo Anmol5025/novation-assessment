@@ -1,10 +1,22 @@
 const OpenAI = require('openai');
 
-const openai = new OpenAI({
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
-});
+}) : null;
 
 const analyzeDocument = async (documentText, documentTitle) => {
+  if (!openai) {
+    console.warn('OpenAI API key not configured');
+    return {
+      summary: 'AI analysis unavailable. Please configure OPENAI_API_KEY.',
+      keyTerms: [],
+      parties: [],
+      obligations: [],
+      risks: [],
+      deadlines: []
+    };
+  }
+
   try {
     const prompt = `Analyze this legal document titled "${documentTitle}". Provide:
 1. A brief summary (2-3 sentences)
