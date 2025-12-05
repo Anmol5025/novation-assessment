@@ -28,24 +28,34 @@ A smart filing cabinet for legal documents with AI-powered insights, deadline tr
 ### Installation (5 minutes)
 
 ```bash
-# 1. Install dependencies
-install.bat
+# 1. Install backend dependencies
+cd backend
+npm install
+cd ..
 
-# 2. Setup environment variables
-setup-env.bat
+# 2. Install frontend dependencies
+cd frontend
+npm install
+cd ..
 
-# 3. Edit backend/.env with your credentials (see below)
+# 3. Setup environment variables
+copy backend\.env.example backend\.env
+copy frontend\.env.local.example frontend\.env.local
 
-# 4. Start MongoDB
+# 4. Edit backend/.env with your credentials (see below)
+
+# 5. Start MongoDB
 mongod
 
-# 5. Start backend
-start-backend.bat
+# 6. Start backend (in one terminal)
+cd backend
+npm run dev
 
-# 6. Start frontend
-start-frontend.bat
+# 7. Start frontend (in another terminal)
+cd frontend
+npm run dev
 
-# 7. Open browser
+# 8. Open browser
 http://localhost:3000
 ```
 
@@ -56,10 +66,7 @@ http://localhost:3000
 ### Step 1: Create .env Files
 
 ```bash
-# Run setup helper
-setup-env.bat
-
-# Or manually:
+# Create environment files
 copy backend\.env.example backend\.env
 copy frontend\.env.local.example frontend\.env.local
 ```
@@ -525,10 +532,6 @@ legal-doc-platform/
 │   ├── tailwind.config.js
 │   └── next.config.js
 │
-├── install.bat                   # Installation script
-├── setup-env.bat                # Environment setup helper
-├── start-backend.bat            # Backend startup script
-├── start-frontend.bat           # Frontend startup script
 └── README.md                    # This file
 ```
 
@@ -607,12 +610,12 @@ mongod
 
 ## You're Ready!
 
-1. Run `install.bat` to install dependencies
-2. Run `setup-env.bat` to create .env files
+1. Install dependencies: `cd backend && npm install && cd ../frontend && npm install`
+2. Create .env files: `copy backend\.env.example backend\.env` and `copy frontend\.env.local.example frontend\.env.local`
 3. Edit `backend/.env` with your credentials
 4. Start MongoDB: `mongod`
-5. Start backend: `start-backend.bat`
-6. Start frontend: `start-frontend.bat`
+5. Start backend: `cd backend && npm run dev`
+6. Start frontend: `cd frontend && npm run dev`
 7. Open http://localhost:3000
 8. Register and start managing documents!
 
